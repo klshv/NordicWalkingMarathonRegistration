@@ -1,0 +1,45 @@
+﻿@using Task2.Models
+@model List<Task2.Models.Participant>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<head>
+    <title>All Participants - Nordic walking marathon</title>
+    <link rel="stylesheet" href="~/css/participants.css" />
+</head>
+<body>
+<h1>Список всех участников</h1>
+<div class="table-container">
+    <table>
+        <thead>
+        <tr>
+            <th>Имя</th>
+            <th>Пол</th>
+            <th>Возраст</th>
+            <th>Опыт</th>
+            <th>Город</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (Participant participant in Model)
+        {
+            <tr>
+                <td>@participant.Name</td>
+                <td>@participant.Gender</td>
+                <td>@participant.Age</td>
+                <td>@participant.Experience</td>
+                <td>@participant.City</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+    <div>
+        <a href="/Registration/Index" class="back-button">Назад к регистрации</a>
+        <a href="/Registration/DownloadParticipants" class="download-button">Скачать JSON</a>
+    </div>
+</div>
+</body>

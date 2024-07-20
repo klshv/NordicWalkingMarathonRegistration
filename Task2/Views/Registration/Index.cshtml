@@ -1,0 +1,52 @@
+﻿@model Task2.Models.Participant
+
+@{ 
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<head>
+    <title>Registration form for Nordic walking marathon participants</title>
+    <link rel="stylesheet" href="~/css/registration.css" />
+</head>
+<h1>Регистрация участников марафона по скандинавской ходьбе</h1>
+<form method="post" action="/Registration/Register"></form>
+@using (Html.BeginForm("Register", "Registration", FormMethod.Post)) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div class="registration-form">
+        <div>
+            @Html.LabelFor(model => model.Name)
+            @Html.TextBoxFor(model => model.Name, new { id = "name", placeholder = "Введите имя"})
+            <div class="text-danger"> @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })</div>
+        </div>
+        <div>
+            @Html.LabelFor(model => model.Gender)
+            @Html.DropDownListFor(model => model.Gender, new SelectList(new[] { "Мужской", "Женский" }), new { id = "gender" })
+            @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+        </div>
+        <div>
+            @Html.LabelFor(model => model.Age)
+            @Html.TextBoxFor(model => model.Age, new { id = "age" , @value = Model.Age})
+            <div class="text-danger">@Html.ValidationMessageFor(model => model.Age, "", new { @class = "text-danger" })</div>
+        </div>
+        <div>
+            @Html.LabelFor(model => model.Experience)
+            @Html.TextBoxFor(model => model.Experience, new { id = "expirience",  @value = Model.Experience})
+            <div class="text-danger">@Html.ValidationMessageFor(model => model.Experience, "", new { @class = "text-danger" })</div>
+        </div>
+        <div>
+            @Html.LabelFor(model => model.City)
+            @Html.TextBoxFor(model => model.City, new { id = "city", placeholder = "Укажите свой город" })
+            <div class="text-danger">@Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })</div>
+        </div>
+        <div>
+            <button type="submit">Зарегистрироваться</button>
+        </div>
+    </div>
+}
+<div class="all-form">
+<form method="get" action="/Registration/AllParticipants">
+    <button type="submit" class="button">Список всех участников</button>
+</form>
+</div>
